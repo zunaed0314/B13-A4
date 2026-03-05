@@ -15,6 +15,13 @@ function active(btn) {
 
     if (btn.id === "all") {
         document.getElementById('jobs').classList.remove("hidden");
+        
+        const totaljobs = document.querySelectorAll('#jobs .job').length;
+        const numstatus = document.getElementById('cardnum');
+
+
+        numstatus.innerHTML = `<span class="text-gray-500">${totaljobs} jobs</span>`;
+
     }
     else if (btn.id === "int") {
         document.getElementById('interview-section').classList.remove("hidden");
@@ -32,7 +39,7 @@ function active(btn) {
         const numstatus = document.getElementById('cardnum');
 
         numstatus.innerHTML = `<span class="text-gray-500">${intjobs} of ${totaljobs} jobs</span>`;
-        
+
     }
     else if (btn.id === "reject") {
         document.getElementById('reject-section').classList.remove("hidden");
@@ -43,5 +50,11 @@ function active(btn) {
             btn.classList.remove("text-indigo-950", "text-green-600", "bg-green-200");
             btn.classList.add("text-red-600", "bg-red-200");
         });
+
+        const totaljobs = document.querySelectorAll('#jobs .job').length;
+        const rejectjobs = document.querySelectorAll('#reject-section .job').length;
+        const numstatus = document.getElementById('cardnum');
+
+        numstatus.innerHTML = `<span class="text-gray-500">${rejectjobs} of ${totaljobs} jobs</span>`;
     }
 }

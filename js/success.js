@@ -4,6 +4,14 @@ document.addEventListener('click', function (e) {
 
         let card = e.target.parentElement.parentElement; //job card
 
+        if (card.parentElement.id === "reject-section") {
+            const totaljobs = document.querySelectorAll('#jobs .job').length;
+            const rejectjobs = document.querySelectorAll('#reject-section .job').length - 1;
+            const numstatus = document.getElementById('cardnum');
+
+            numstatus.innerHTML = `<span class="text-gray-500">${rejectjobs} of ${totaljobs} jobs</span>`;
+        }
+
         const alljobs = document.querySelectorAll('#jobs .job'); //gets all jobs in the jobs section
         alljobs.forEach(function (job) {
             if (job.innerHTML === card.innerHTML) {
@@ -24,6 +32,13 @@ document.addEventListener('click', function (e) {
         const cardCopy = document.createElement("div");
         cardCopy.className = card.className;
         cardCopy.innerHTML = card.innerHTML;
+
+
+
+        /*Jodi Interview button e click kori jobs section theke,
+        taile check korbe je same card reject Section e ache kina.
+        jodi thake tahole reject section theke sheta remove hoye jabe
+        */
 
         if (card.parentElement.id === "jobs") {
             const status = document.querySelectorAll('#reject-section .job');
@@ -76,6 +91,8 @@ document.addEventListener('click', function (e) {
             }
         }
 
+        
+
         updateCounters();
     }
 
@@ -83,6 +100,14 @@ document.addEventListener('click', function (e) {
 
         let card = e.target.parentElement.parentElement;   //job card
         const alljobs = document.querySelectorAll('#jobs .job');  //all job cards from jobs section
+
+        if (card.parentElement.id === "interview-section") {
+            const totaljobs = document.querySelectorAll('#jobs .job').length;
+            const intjobs = document.querySelectorAll('#interview-section .job').length - 1;
+            const numstatus = document.getElementById('cardnum');
+
+            numstatus.innerHTML = `<span class="text-gray-500">${intjobs} of ${totaljobs} jobs</span>`;
+        }
 
 
         alljobs.forEach(function (job) {
@@ -106,6 +131,10 @@ document.addEventListener('click', function (e) {
         cardCopy.className = card.className;
         cardCopy.innerHTML = card.innerHTML;
 
+        /*Jodi reject button e click kori jobs section theke,
+        taile check korbe je same card interview Section e ache kina.
+        jodi thake tahole interview section theke sheta remove hoye jabe
+        */
         if (card.parentElement.id === "jobs") {
             const status = document.querySelectorAll('#interview-section .job');
             status.forEach(function (job) {

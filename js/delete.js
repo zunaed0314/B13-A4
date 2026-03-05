@@ -14,24 +14,24 @@ document.addEventListener('click', function (e) {
         if (card && card.classList.contains('job')) {
 
 
-            // if (card.parentElement.id === "interview-section") {
-            //     console.log(card.parentElement.id);
-            //     let num = document.querySelectorAll('#jobs .job').length;
-            //     let num2 = document.querySelectorAll('#interview-section .job').length - 1;
+            if (card.parentElement.id === "interview-section") {
+                console.log(card.parentElement.id);
+                let num = document.querySelectorAll('#jobs .job').length;
+                let num2 = document.querySelectorAll('#interview-section .job').length - 1;
 
-            //     const numstatus = document.getElementById('cardnum');
-            //     numstatus.innerHTML = `<span class="text-gray-500">${num2} of ${num} jobs</span>`;
+                const numstatus = document.getElementById('cardnum');
+                numstatus.innerHTML = `<span class="text-gray-500">${num2} of ${num} jobs</span>`;
 
-            // }
-            // else if (card.parentElement.id === "reject-section") {
-            //     console.log(card.parentElement.id);
+            }
+            else if (card.parentElement.id === "reject-section") {
+                console.log(card.parentElement.id);
 
-            //     let num = document.querySelectorAll('#jobs .job').length;
-            //     let num3 = document.querySelectorAll('#reject-section .job').length - 1;
+                let num = document.querySelectorAll('#jobs .job').length;
+                let num3 = document.querySelectorAll('#reject-section .job').length - 1;
 
-            //     const numstatus = document.getElementById('cardnum');
-            //     numstatus.innerHTML = `<span class="text-gray-500">${num3} of ${num} jobs</span>`;
-            // }
+                const numstatus = document.getElementById('cardnum');
+                numstatus.innerHTML = `<span class="text-gray-500">${num3} of ${num} jobs</span>`;
+            }
 
             card.remove();
             updateCounters();
