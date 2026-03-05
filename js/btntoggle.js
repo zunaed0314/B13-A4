@@ -1,9 +1,6 @@
 function active(btn) {
     var buttons = btn.parentElement.querySelectorAll(".btn-1");
 
-    console.log(buttons);
-    console.log(btn.id);
-
     for (var i = 0; i < buttons.length; i++) {
         buttons[i].classList.remove("btn-primary");
         buttons[i].classList.add("bg-base-300");
@@ -28,6 +25,14 @@ function active(btn) {
             btn.classList.remove("text-indigo-950", "text-red-600", "bg-red-200");
             btn.classList.add("text-green-600", "bg-green-200");
         });
+
+
+        const totaljobs = document.querySelectorAll('#jobs .job').length;
+        const intjobs = document.querySelectorAll('#interview-section .job').length;
+        const numstatus = document.getElementById('cardnum');
+
+        numstatus.innerHTML = `<span class="text-gray-500">${intjobs} of ${totaljobs} jobs</span>`;
+        
     }
     else if (btn.id === "reject") {
         document.getElementById('reject-section').classList.remove("hidden");

@@ -3,14 +3,14 @@ document.addEventListener('click', function (e) {
     if (e.target.classList.contains('success')) {
 
         let card = e.target.parentElement.parentElement; //job card
-        const alljobs = document.querySelectorAll('#jobs .job'); //gets all jobs in the jobs section
 
+        const alljobs = document.querySelectorAll('#jobs .job'); //gets all jobs in the jobs section
         alljobs.forEach(function (job) {
             if (job.innerHTML === card.innerHTML) {
                 const statusbtn = job.querySelector('.status-check');
                 statusbtn.textContent = "INTERVIEW";
                 statusbtn.classList.remove("text-indigo-950", "text-red-600", "bg-red-200");
-                statusbtn.classList.add("text-green-600", "bg-green-200");
+                statusbtn.classList.add("text-green-600", "bg-green-200"); //changing the status of the job in the jobs section
             }
         });
 
@@ -21,10 +21,28 @@ document.addEventListener('click', function (e) {
             statusBtn.classList.add("text-green-600", "bg-green-200");
         }
 
-
         const cardCopy = document.createElement("div");
         cardCopy.className = card.className;
         cardCopy.innerHTML = card.innerHTML;
+
+        if (card.parentElement.id === "jobs") {
+            const status = document.querySelectorAll('#reject-section .job');
+            status.forEach(function (job) {
+                const cardCopy2 = document.createElement("div");
+                cardCopy2.className = job.className;
+                cardCopy2.innerHTML = job.innerHTML;
+                cardCopy2.removeChild(cardCopy2.querySelector('.status-check'));
+
+                const cardCopy3 = document.createElement("div");
+                cardCopy3.className = cardCopy.className;
+                cardCopy3.innerHTML = cardCopy.innerHTML;
+                cardCopy3.removeChild(cardCopy3.querySelector('.status-check'));
+
+                if (cardCopy3.innerHTML === cardCopy2.innerHTML) {
+                    job.remove();
+                }
+            });
+        }
 
 
         const intSection = document.getElementById("interview-section");
@@ -62,10 +80,9 @@ document.addEventListener('click', function (e) {
     }
 
     if (e.target.classList.contains('rejected')) {
-        console.log("Rejected button clicked");
 
-        let card = e.target.parentElement.parentElement;
-        const alljobs = document.querySelectorAll('#jobs .job');
+        let card = e.target.parentElement.parentElement;   //job card
+        const alljobs = document.querySelectorAll('#jobs .job');  //all job cards from jobs section
 
 
         alljobs.forEach(function (job) {
@@ -88,6 +105,25 @@ document.addEventListener('click', function (e) {
         const cardCopy = document.createElement("div");
         cardCopy.className = card.className;
         cardCopy.innerHTML = card.innerHTML;
+
+        if (card.parentElement.id === "jobs") {
+            const status = document.querySelectorAll('#interview-section .job');
+            status.forEach(function (job) {
+                const cardCopy2 = document.createElement("div");
+                cardCopy2.className = job.className;
+                cardCopy2.innerHTML = job.innerHTML;
+                cardCopy2.removeChild(cardCopy2.querySelector('.status-check'));
+
+                const cardCopy3 = document.createElement("div");
+                cardCopy3.className = cardCopy.className;
+                cardCopy3.innerHTML = cardCopy.innerHTML;
+                cardCopy3.removeChild(cardCopy3.querySelector('.status-check'));
+
+                if (cardCopy3.innerHTML === cardCopy2.innerHTML) {
+                    job.remove();
+                }
+            });
+        }
 
         const rejectSection = document.getElementById("reject-section");
         const childs = rejectSection.children;
@@ -132,6 +168,4 @@ function updateCounters() {
     document.getElementById('interview').textContent = interviewJobs;
     document.getElementById('reject').textContent = rejectedJobs;
     document.getElementById('countjobs').textContent = totalJobs;
-
-    console.log(`Counters updated - Total: ${totalJobs}, Interview: ${interviewJobs}, Rejected: ${rejectedJobs}`);
 }
