@@ -21,8 +21,22 @@ function active(btn) {
     }
     else if (btn.id === "int") {
         document.getElementById('interview-section').classList.remove("hidden");
+
+        const status = document.querySelectorAll('#interview-section .status-check');
+        status.forEach(function (btn) {
+            btn.textContent = "INTERVIEW";
+            btn.classList.remove("text-indigo-950", "text-red-600", "bg-red-200");
+            btn.classList.add("text-green-600", "bg-green-200");
+        });
     }
     else if (btn.id === "reject") {
         document.getElementById('reject-section').classList.remove("hidden");
+
+        const status = document.querySelectorAll('#reject-section .status-check');
+        status.forEach(function (btn) {
+            btn.textContent = "REJECTED";
+            btn.classList.remove("text-indigo-950", "text-green-600", "bg-green-200");
+            btn.classList.add("text-red-600", "bg-red-200");
+        });
     }
 }
