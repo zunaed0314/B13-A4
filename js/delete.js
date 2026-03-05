@@ -51,6 +51,10 @@ document.addEventListener('click', function (e) {
                     }
                 });
                 card.remove();
+                if (document.getElementById('interview-section').querySelectorAll('.job').length === 0) {
+                    document.getElementById('interview-section').classList.add('hidden');
+                    document.getElementById('nojobs').classList.remove('hidden');
+                }
             }
             else if (card.parentElement.id === "reject-section") {
 
@@ -91,6 +95,10 @@ document.addEventListener('click', function (e) {
                     }
                 });
                 card.remove();
+                if (document.getElementById('reject-section').querySelectorAll('.job').length === 0) {
+                    document.getElementById('reject-section').classList.add('hidden');
+                    document.getElementById('nojobs').classList.remove('hidden');
+                }
             }
             else if (card.parentElement.id === "jobs") {
                 const cardCopy = document.createElement('div');
@@ -136,11 +144,20 @@ document.addEventListener('click', function (e) {
                         if (cardCopy2.innerHTML === cardCopy.innerHTML) {
                             job.remove();
                             card.remove();
+                            if (document.getElementById('jobs').querySelectorAll('.job').length === 0) {
+                                document.getElementById('jobs').classList.add('hidden');
+                                document.getElementById('nojobs').classList.remove('hidden');
+                            }
                         }
                     });
                 }
-                else if (cardCopy.querySelector('status-check').textContent === "NOT APPLIED"){
+                else if (cardCopy.querySelector('.status-check').textContent === "NOT APPLIED"){
+                    console.log("NOT APPLIED condition met - removing card");
                     card.remove();
+                    if (document.getElementById('jobs').querySelectorAll('.job').length === 0) {
+                        document.getElementById('jobs').classList.add('hidden');
+                        document.getElementById('nojobs').classList.remove('hidden');
+                    }
                 }
             }
 

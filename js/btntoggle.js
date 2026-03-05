@@ -12,15 +12,22 @@ function active(btn) {
     document.getElementById('jobs').classList.add("hidden");
     document.getElementById('interview-section').classList.add("hidden");
     document.getElementById('reject-section').classList.add("hidden");
+    document.getElementById('nojobs').classList.add('hidden');
 
     if (btn.id === "all") {
         document.getElementById('jobs').classList.remove("hidden");
-        
+
         const totaljobs = document.querySelectorAll('#jobs .job').length;
         const numstatus = document.getElementById('cardnum');
 
 
         numstatus.innerHTML = `<span class="text-gray-500">${totaljobs} jobs</span>`;
+
+
+        if(totaljobs=== 0) {
+            document.getElementById('jobs').classList.add('hidden');
+            document.getElementById('nojobs').classList.remove('hidden');
+        }
 
     }
     else if (btn.id === "int") {
@@ -40,6 +47,11 @@ function active(btn) {
 
         numstatus.innerHTML = `<span class="text-gray-500">${intjobs} of ${totaljobs} jobs</span>`;
 
+        if(intjobs===0) {
+            document.getElementById('interview-section').classList.add('hidden');
+            document.getElementById('nojobs').classList.remove('hidden');
+        }
+
     }
     else if (btn.id === "reject") {
         document.getElementById('reject-section').classList.remove("hidden");
@@ -56,5 +68,10 @@ function active(btn) {
         const numstatus = document.getElementById('cardnum');
 
         numstatus.innerHTML = `<span class="text-gray-500">${rejectjobs} of ${totaljobs} jobs</span>`;
+
+        if(rejectjobs===0) {
+            document.getElementById('reject-section').classList.add('hidden');
+            document.getElementById('nojobs').classList.remove('hidden');
+        }
     }
 }
