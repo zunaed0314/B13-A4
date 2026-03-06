@@ -123,6 +123,12 @@ document.addEventListener('click', function (e) {
                         if (cardCopy2.innerHTML === cardCopy.innerHTML) {
                             job.remove();
                             card.remove();
+
+                            let num = document.querySelectorAll('#jobs .job').length;
+                            const numstatus = document.getElementById('cardnum');
+                            numstatus.innerHTML = `<span class="text-gray-500">${num} jobs</span>`;
+
+
                         }
                     });
                 }
