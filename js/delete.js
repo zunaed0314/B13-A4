@@ -145,7 +145,7 @@ document.addEventListener('click', function (e) {
                     });
                     card.remove();
                     console.log("REJECT SECTION THEKE MATCHED CARD REMOVED")
-                    checkempty('reject-section');
+                    checkempty('jobs');
                     checkSections('jobs');
                 }
                 else if (cardCopy.querySelector('.status-check').textContent === "NOT APPLIED") {
