@@ -35,8 +35,6 @@ document.addEventListener('click', function (e) {
         }
 
 
-
-
         /*Jodi Interview button e click kori jobs section theke,
         taile check korbe je same card reject Section e ache kina.
         jodi thake tahole reject section theke sheta remove hoye jabe
@@ -106,9 +104,7 @@ document.addEventListener('click', function (e) {
                 }
             }
         }
-
         updateCounters();
-
     }
 
 

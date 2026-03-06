@@ -12,12 +12,12 @@ document.addEventListener('click', function (e) {
         const card = trashBtn.parentElement;
 
         if (card && card.classList.contains('job')) {
-            if (card.parentElement.id === "interview-section") {
+            if (card.parentElement.id === "interview-section") {   //JOKHON INTERVIEW SECTION THEKE DELETE KORTESI
                 let num = document.querySelectorAll('#jobs .job').length;
                 let num2 = document.querySelectorAll('#interview-section .job').length - 1;
 
                 const numstatus = document.getElementById('cardnum');
-                numstatus.innerHTML = `<span class="text-gray-500">${num2} of ${num} jobs</span>`;
+                numstatus.innerHTML = `<span class="text-gray-500">${num2} of ${num} jobs</span>`; //1 of 8 jobs
 
 
                 const cardCopy = document.createElement('div');
@@ -35,18 +35,18 @@ document.addEventListener('click', function (e) {
                     const cardCopy2 = document.createElement("div");
                     cardCopy2.className = job.className;
                     cardCopy2.innerHTML = job.innerHTML;
+
                     const statusCheck2 = cardCopy2.querySelector('.status-check');
                     if (statusCheck2) {
                         cardCopy2.removeChild(statusCheck2);
                     }
-
 
                     if (cardCopy2.innerHTML === cardCopy.innerHTML) {
                         const jobStatus = job.querySelector('.status-check');
                         if (jobStatus) {
                             jobStatus.classList.remove("text-green-600", "bg-green-200");
                             jobStatus.classList.add("text-indigo-950", "btn-soft");
-                            jobStatus.textContent = 'NOT APPLIED';
+                            jobStatus.textContent = 'NOT APPLIED';   //INTERVIEW THEKE DELETE KORLE STATUS TA NOT APPLIED E HOYE JABE
                         }
                     }
                 });
@@ -109,6 +109,7 @@ document.addEventListener('click', function (e) {
                     const statusCheck = cardCopy.querySelector('.status-check');
                     if (statusCheck) {
                         cardCopy.removeChild(statusCheck);
+                        console.log("Interview status removed from jobs card");
                     }
                     const alljobs = document.querySelectorAll('#interview-section .job');
 
@@ -119,23 +120,37 @@ document.addEventListener('click', function (e) {
                         const statusCheck2 = cardCopy2.querySelector('.status-check');
                         if (statusCheck2) {
                             cardCopy2.removeChild(statusCheck2);
+                            console.log("Interview status removed from interview section card")
                         }
                         if (cardCopy2.innerHTML === cardCopy.innerHTML) {
                             job.remove();
-                            card.remove();
+                            console.log("interview section theke card removed");
 
-                            let num = document.querySelectorAll('#jobs .job').length;
-                            const numstatus = document.getElementById('cardnum');
-                            numstatus.innerHTML = `<span class="text-gray-500">${num} jobs</span>`;
+                            // card.remove();
 
-
+                            // let num = document.querySelectorAll('#jobs .job').length;
+                            // const numstatus = document.getElementById('cardnum');
+                            // numstatus.innerHTML = `<span class="text-gray-500">${num} jobs</span>`;
+                            
                         }
+                        
                     });
+                    card.remove();
+                    console.log("INTERVIEW SECTION THEKE MATCHED CARD REMOVED");
+                    if (document.getElementById('jobs').querySelectorAll('.job').length === 0) {
+                        document.getElementById('jobs').classList.add('hidden');
+                        document.getElementById('nojobs').classLiist.remove('hidden');
+                    }
+                    
+                    // let num = document.querySelectorAll('#jobs .job').length;
+                    // const numstatus = document.getElementById('cardnum');
+                    // numstatus.innerHTML = `<span class="text-gray-500">${num} jobs</span>`;
                 }
                 else if (cardCopy.querySelector('.status-check').textContent === "REJECTED") {
                     const statusCheck = cardCopy.querySelector('.status-check');
                     if (statusCheck) {
                         cardCopy.removeChild(statusCheck);
+                        console.log("STATUS REMOVED FROM THE JOBS CARD");
                     }
                     const alljobs = document.querySelectorAll('#reject-section .job');
 
@@ -146,28 +161,40 @@ document.addEventListener('click', function (e) {
                         const statusCheck2 = cardCopy2.querySelector('.status-check');
                         if (statusCheck2) {
                             cardCopy2.removeChild(statusCheck2);
+                            console.log("STATUS REMOVED FROM THE REJECT-SECTION CARD");
                         }
                         if (cardCopy2.innerHTML === cardCopy.innerHTML) {
                             job.remove();
-                            card.remove();
-                            if (document.getElementById('jobs').querySelectorAll('.job').length === 0) {
-                                document.getElementById('jobs').classList.add('hidden');
-                                document.getElementById('nojobs').classList.remove('hidden');
-                            }
+                            
+                            // let num = document.querySelectorAll('#jobs .job').length;
+                            // const numstatus = document.getElementById('cardnum');
+                            // numstatus.innerHTML = `<span class="text-gray-500">${num} jobs</span>`;
                         }
                     });
+                    card.remove();
+                    console.log("REJECT SECTION THEKE MATCHED CARD REMOVED")
+                    if (document.getElementById('jobs').querySelectorAll('.job').length === 0) {
+                        document.getElementById('jobs').classList.add('hidden');
+                        document.getElementById('nojobs').classList.remove('hidden');
+                    }
+                    // let num = document.querySelectorAll('#jobs .job').length;
+                    // const numstatus = document.getElementById('cardnum');
+                    // numstatus.innerHTML = `<span class="text-gray-500">${num} jobs</span>`;
                 }
-                else if (cardCopy.querySelector('.status-check').textContent === "NOT APPLIED"){
-                    console.log("NOT APPLIED condition met - removing card");
+                else if (cardCopy.querySelector('.status-check').textContent === "NOT APPLIED") {
                     card.remove();
                     if (document.getElementById('jobs').querySelectorAll('.job').length === 0) {
                         document.getElementById('jobs').classList.add('hidden');
                         document.getElementById('nojobs').classList.remove('hidden');
                     }
+                    // let num = document.querySelectorAll('#jobs .job').length;
+                    // const numstatus = document.getElementById('cardnum');
+                    // numstatus.innerHTML = `<span class="text-gray-500">${num} jobs</span>`;
                 }
+                updateCounters();
             }
 
-            updateCounters();
+            
         }
     }
 });
@@ -182,5 +209,8 @@ function updateCounters() {
     document.getElementById('reject').textContent = rejectedJobs;
     document.getElementById('countjobs').textContent = totalJobs;
 
-    console.log(`Counters updated - Total: ${totalJobs}, Interview: ${interviewJobs}, Rejected: ${rejectedJobs}`);
+    let num = document.querySelectorAll('#jobs .job').length;
+    const numstatus = document.getElementById('cardnum');
+    numstatus.innerHTML = `<span class="text-gray-500">${num} jobs</span>`;
+
 }
