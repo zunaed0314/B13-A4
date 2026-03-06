@@ -13,12 +13,6 @@ document.addEventListener('click', function (e) {
 
         if (card && card.classList.contains('job')) {
             if (card.parentElement.id === "interview-section") {   //JOKHON INTERVIEW SECTION THEKE DELETE KORTESI
-                let num = document.querySelectorAll('#jobs .job').length;
-                let num2 = document.querySelectorAll('#interview-section .job').length - 1;
-
-                const numstatus = document.getElementById('cardnum');
-                numstatus.innerHTML = `<span class="text-gray-500">${num2} of ${num} jobs</span>`; //1 of 8 jobs
-
 
                 const cardCopy = document.createElement('div');
                 cardCopy.className = card.className;
@@ -51,10 +45,8 @@ document.addEventListener('click', function (e) {
                     }
                 });
                 card.remove();
-                if (document.getElementById('interview-section').querySelectorAll('.job').length === 0) {
-                    document.getElementById('interview-section').classList.add('hidden');
-                    document.getElementById('nojobs').classList.remove('hidden');
-                }
+                checkempty('interview-section');
+                checkSections('interview-section');
             }
             else if (card.parentElement.id === "reject-section") {
 
@@ -95,10 +87,8 @@ document.addEventListener('click', function (e) {
                     }
                 });
                 card.remove();
-                if (document.getElementById('reject-section').querySelectorAll('.job').length === 0) {
-                    document.getElementById('reject-section').classList.add('hidden');
-                    document.getElementById('nojobs').classList.remove('hidden');
-                }
+                checkempty('reject-section');
+                checkSections('reject-section');
             }
             else if (card.parentElement.id === "jobs") {
                 const cardCopy = document.createElement('div');
@@ -125,26 +115,12 @@ document.addEventListener('click', function (e) {
                         if (cardCopy2.innerHTML === cardCopy.innerHTML) {
                             job.remove();
                             console.log("interview section theke card removed");
-
-                            // card.remove();
-
-                            // let num = document.querySelectorAll('#jobs .job').length;
-                            // const numstatus = document.getElementById('cardnum');
-                            // numstatus.innerHTML = `<span class="text-gray-500">${num} jobs</span>`;
-                            
                         }
-                        
+
                     });
                     card.remove();
-                    console.log("INTERVIEW SECTION THEKE MATCHED CARD REMOVED");
-                    if (document.getElementById('jobs').querySelectorAll('.job').length === 0) {
-                        document.getElementById('jobs').classList.add('hidden');
-                        document.getElementById('nojobs').classLiist.remove('hidden');
-                    }
-                    
-                    // let num = document.querySelectorAll('#jobs .job').length;
-                    // const numstatus = document.getElementById('cardnum');
-                    // numstatus.innerHTML = `<span class="text-gray-500">${num} jobs</span>`;
+                    checkempty('jobs');
+                    checkSections('jobs');
                 }
                 else if (cardCopy.querySelector('.status-check').textContent === "REJECTED") {
                     const statusCheck = cardCopy.querySelector('.status-check');
@@ -165,36 +141,20 @@ document.addEventListener('click', function (e) {
                         }
                         if (cardCopy2.innerHTML === cardCopy.innerHTML) {
                             job.remove();
-                            
-                            // let num = document.querySelectorAll('#jobs .job').length;
-                            // const numstatus = document.getElementById('cardnum');
-                            // numstatus.innerHTML = `<span class="text-gray-500">${num} jobs</span>`;
                         }
                     });
                     card.remove();
                     console.log("REJECT SECTION THEKE MATCHED CARD REMOVED")
-                    if (document.getElementById('jobs').querySelectorAll('.job').length === 0) {
-                        document.getElementById('jobs').classList.add('hidden');
-                        document.getElementById('nojobs').classList.remove('hidden');
-                    }
-                    // let num = document.querySelectorAll('#jobs .job').length;
-                    // const numstatus = document.getElementById('cardnum');
-                    // numstatus.innerHTML = `<span class="text-gray-500">${num} jobs</span>`;
+                    checkempty('reject-section');
+                    checkSections('jobs');
                 }
                 else if (cardCopy.querySelector('.status-check').textContent === "NOT APPLIED") {
                     card.remove();
-                    if (document.getElementById('jobs').querySelectorAll('.job').length === 0) {
-                        document.getElementById('jobs').classList.add('hidden');
-                        document.getElementById('nojobs').classList.remove('hidden');
-                    }
-                    // let num = document.querySelectorAll('#jobs .job').length;
-                    // const numstatus = document.getElementById('cardnum');
-                    // numstatus.innerHTML = `<span class="text-gray-500">${num} jobs</span>`;
+                    checkempty('jobs');
+                    checkSections('jobs');
                 }
-                updateCounters();
             }
-
-            
+            updateCounters();
         }
     }
 });
@@ -207,10 +167,28 @@ function updateCounters() {
     document.getElementById('total').textContent = totalJobs;
     document.getElementById('interview').textContent = interviewJobs;
     document.getElementById('reject').textContent = rejectedJobs;
-    document.getElementById('countjobs').textContent = totalJobs;
 
-    let num = document.querySelectorAll('#jobs .job').length;
-    const numstatus = document.getElementById('cardnum');
-    numstatus.innerHTML = `<span class="text-gray-500">${num} jobs</span>`;
+}
 
+function checkempty(section) {
+    if (document.getElementById(section).querySelectorAll('.job').length === 0) {
+        document.getElementById(section).classList.add('hidden');
+        document.getElementById('nojobs').classList.remove('hidden');
+    }
+
+}
+
+function checkSections(section) {
+    if (section !== "jobs") {
+        let num = document.querySelectorAll('#jobs .job').length;
+        let num2 = document.querySelectorAll(`#${section} .job`).length;
+        const numstatus = document.getElementById('cardnum');
+        numstatus.innerHTML = `<span class="text-gray-500">${num2} of ${num} jobs</span>`;
+    }
+    else
+    {
+        let num = document.querySelectorAll('#jobs .job').length;
+        const numstatus = document.getElementById('cardnum');
+        numstatus.innerHTML = `<span class="text-gray-500">${num} jobs</span>`;
+    }
 }

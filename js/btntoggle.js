@@ -15,7 +15,10 @@ function active(btn) {
     document.getElementById('nojobs').classList.add('hidden');
 
     if (btn.id === "all") {
+
         document.getElementById('jobs').classList.remove("hidden");
+        document.getElementById('interview-section').classList.add("hidden");
+        document.getElementById('reject-section').classList.add("hidden");
 
         const totaljobs = document.querySelectorAll('#jobs .job').length;
         const numstatus = document.getElementById('cardnum');
@@ -24,7 +27,7 @@ function active(btn) {
         numstatus.innerHTML = `<span class="text-gray-500">${totaljobs} jobs</span>`;
 
 
-        if(totaljobs=== 0) {
+        if (totaljobs === 0) {
             document.getElementById('jobs').classList.add('hidden');
             document.getElementById('nojobs').classList.remove('hidden');
         }
@@ -32,6 +35,11 @@ function active(btn) {
     }
     else if (btn.id === "int") {
         document.getElementById('interview-section').classList.remove("hidden");
+        document.getElementById('jobs').classList.add("hidden");
+        document.getElementById('reject-section').classList.add("hidden");
+
+
+
 
         const status = document.querySelectorAll('#interview-section .status-check');
         status.forEach(function (btn) {
@@ -47,13 +55,15 @@ function active(btn) {
 
         numstatus.innerHTML = `<span class="text-gray-500">${intjobs} of ${totaljobs} jobs</span>`;
 
-        if(intjobs===0) {
+        if (intjobs === 0) {
             document.getElementById('interview-section').classList.add('hidden');
             document.getElementById('nojobs').classList.remove('hidden');
         }
 
     }
     else if (btn.id === "reject") {
+        document.getElementById('jobs').classList.add("hidden");
+        document.getElementById('interview-section').classList.add("hidden");
         document.getElementById('reject-section').classList.remove("hidden");
 
         const status = document.querySelectorAll('#reject-section .status-check');
@@ -69,7 +79,7 @@ function active(btn) {
 
         numstatus.innerHTML = `<span class="text-gray-500">${rejectjobs} of ${totaljobs} jobs</span>`;
 
-        if(rejectjobs===0) {
+        if (rejectjobs === 0) {
             document.getElementById('reject-section').classList.add('hidden');
             document.getElementById('nojobs').classList.remove('hidden');
         }

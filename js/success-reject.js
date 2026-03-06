@@ -220,16 +220,10 @@ function updateCounters() {
     document.getElementById('total').textContent = totalJobs;
     document.getElementById('interview').textContent = interviewJobs;
     document.getElementById('reject').textContent = rejectedJobs;
-    document.getElementById('countjobs').textContent = totalJobs;
-
-    // if (interviewJobs === 0) {
-    //     document.getElementById('interview-section').classList.add('hidden');
-    //     document.getElementById('nojobs').classList.remove('hidden');
-    // }
-
-    // if (rejectedJobs === 0) {
-    //     document.getElementById('reject-section').classList.add('hidden');
-    //     document.getElementById('nojobs').classList.remove('hidden');
-    // }
-
+    
+    // Add null check for countjobs
+    const countjobsEl = document.getElementById('countjobs');
+    if (countjobsEl) {
+        countjobsEl.textContent = totalJobs;
+    }
 }
